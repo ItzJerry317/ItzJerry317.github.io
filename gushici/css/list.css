@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao|Long+Cang|Ma+Shan+Zheng|ZCOOL+KuaiLe|ZCOOL+QingKe+HuangYou|ZCOOL+XiaoWei&display=swap&subset=chinese-simplified');
+
+body{
+    background-repeat: repeat;
+    background-size: 100%;
+	background-image: url(../images/67dca928b770558af37b0f4817c19769.gif);
+}
+a{
+    font-family: "Ma Shan Zheng";
+    font-size: 30px;
+    color: rgb(255, 0, 0);
+}
+h1{
+    font-family: "Ma Shan Zheng";
+    font-size: 30px;
+    color: rgb(55, 0, 255);
+}
+p{
+    font-family: "Ma Shan Zheng";
+    font-size: 30px;
+    color: rgb(120, 0, 1);
+}
+div.navigation bar{
+    position: absolute;
+    top: 0px;
+}
+div.general_link{
+    position: absolute;
+    top:150px;
+}
+a.link{
+    position: absolute;
+    top:40px;
+    left:189px;
+}
+
+a.link1{
+    position: absolute;
+    top:40px;
+    left:280px;
+}
+a.link2{
+    position: absolute;
+    top:40px;
+    left:430px;
+}
