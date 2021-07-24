@@ -1,29 +1,18 @@
-<?php
-/**********************************************
-* Filename : img.php
-* Author : freemouse
-* Usage:
-* <img src=img.php>
-* <img src=img.php?folder=images2/>
-***********************************************/
-if($_GET['folder']){
-$folder=$_GET['folder'];
-}else{
-$folder='/randomimages/';
-}
-//存放图片文件的位置
-$path = $_SERVER['DOCUMENT_ROOT']."/".$folder;
-$files=array();
-if ($handle=opendir("$path")) {
-while(false !== ($file = readdir($handle))) {
-if ($file != "." && $file != "..") {
-if(substr($file,-3)=='gif' || substr($file,-3)=='jpg') $files[count($files)] = $file;
-}
-}
-}
-closedir($handle);
-$random=rand(0,count($files)-1);
-if(substr($files[$random],-3)=='gif') header("Content-type: image/gif");
-elseif(substr($files[$random],-3)=='jpg') header("Content-type: image/jpeg");
-readfile("$path/$files[$random]");
-?>
+// 1.读取randImg.txt中的内容，并以换行符分开
+$str = explode("\n", file_get_contents('randImg.txt'));
+// 2.得到的$str是一个String的数组，然后获取随机数index
+$rand_index = rand(0,count($str)-1);
+// 根据生成的随机数选取index为$rand_index的图片链接
+$url = $str[$rand_index];
+// 替换掉转义
+$url = str_re($url);
+// 3.重定向到目标url,返回302码,然后浏览器就会跳转到图片url的地址
+header("Location:".$url);
+// 替换掉一些换行、制表符等转义
+function str_re($str){
+    $str = str_replace(' ', "", $str);
+    $str = str_replace("\n", "", $str);
+    $str = str_replace("\t", "", $str);
+    $str = str_replace("\r", "", $str);
+    return $str;
+  }
