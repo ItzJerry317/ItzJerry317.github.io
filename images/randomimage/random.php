@@ -1,31 +1,33 @@
 <?php
-/**
-* 功能：随机显示图片
-* Filename  : img.php
-* Usage:
-*             <img src=img.php>
-*             <img src=img.php?folder=images2/>
-* Edit: www.jbxue.com
-**/
-  if($_GET['folder']){
-     $folder=$_GET['folder'];
-  }else{
-     $folder='/images/';
-  }
-  //存放图片文件的位置
-  $path = $_SERVER['DOCUMENT_ROOT']."/".$folder;
-  $files=array();
-  if ($handle=opendir("$path")) {
-      while(false !== ($file = readdir($handle))) {
-                if ($file != "." && $file != "..") {
-                if(substr($file,-3)=='gif' || substr($file,-3)=='jpg') $files[count($files)] = $file;
-                }
-      }
-  }
-  closedir($handle); 
+//存有美图链接的文件名img.txt
+$filename = "randimg.txt";
+if(!file_exists($filename)){
+    die('文件不存在');
+}
  
-  $random=rand(0,count($files)-1);
-  if(substr($files[$random],-3)=='gif') header("Content-type: image/gif");
-  elseif(substr($files[$random],-3)=='jpg') header("Content-type: image/jpeg");
-  readfile("$path/$files[$random]");
+//从文本获取链接
+$pics = [];
+$fs = fopen($filename, "r");
+while(!feof($fs)){
+    $line=trim(fgets($fs));
+    if($line!=''){
+        array_push($pics, $line);
+    }
+}
+ 
+//从数组随机获取链接
+$pic = $pics[array_rand($pics)];
+ 
+//返回指定格式
+$type=$_GET['type'];
+switch($type){
+ 
+//JSON返回
+case 'json':
+    header('Content-type:text/json');
+    die(json_encode(['pic'=>$pic]));
+ 
+default:
+    die(header("Location: $pic"));
+}
 ?>
