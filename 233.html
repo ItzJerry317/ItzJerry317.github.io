@@ -1,0 +1,188 @@
+<h2>javascript大杂烩</h2>
+<h5>↓赋值变量，通过javascript更改id为demo的html元素</h5>
+<p id="demo"></p>
+<script>
+    var a = 2;    //这是我的第一个javascript脚本，这是给变量赋值
+    document.getElementById("demo").innerHTML = a;   //通过javascript更改element
+</script>
+<p>-----------------------------------------------------------------------</p>
+<p id="demo2"></p>
+<script>
+    function sayhi(){
+        document.getElementById("demo2").innerHTML = "Hello, world!";
+    }
+</script>
+<button type="button" onclick="sayhi()">点我以使用function sayhi()</button>
+<p>-----------------------------------------------------------------------</p>
+<p id="demo3"></p>
+<script>
+    switch (new Date().getDay()){
+        case 0:
+            day = "星期天";
+            break;
+        case 1:
+            day = "星期一";
+            break;
+        case 2:
+            day = "星期二";
+            break;
+        case 3:
+            day = "星期三";
+            break;
+        case 4:
+            day = "星期四"
+            break;
+        case 5:
+            day = "星期五"
+            break;
+        case 6:
+            day = "星期六";
+    }
+</script>
+<button type="button" onclick="document.getElementById('demo3').innerHTML = '今天是' + day">点击我查看今天星期几</button>
+<p>-----------------------------------------------------------------------</p>
+<p>问：你现在的状态？</p>
+<p id="answer"></p>
+<script>
+    switch (new Date().getDay()) {
+        case 6:
+            answer = "今天是星期六呀，爽歪歪";
+            break;
+        case 0:
+            answer = "今天是星期天呀，爽歪歪" ;
+            break;
+        default:
+            switch (new Date().getDay()) {
+                case 1:
+                    day = "星期一";
+                    break;
+                case 2:
+                    day = "星期二";
+                    break;
+                case 3:
+                    day = "星期三";
+                    break;
+                case 4:
+                    day = "星期四";
+                    break;
+                case 5:
+                    day = "星期五";
+                }
+            answer = "今天是" + day + '呀，期待周末'
+    }
+</script>
+<button type="button" onclick="document.getElementById('answer').innerHTML = answer">点我查看回答</button>
+<p>-----------------------------------------------------------------------</p>
+<p>（这里故意使用了一个错误的代码使try代码报错）</p>
+<p id="alert"></p>
+<script>
+    try {
+        aababalert("Welcmoe!");
+    }
+    catch(err) {
+        document.getElementById("alert").innerHTML = err.message
+    }
+</script>
+<p>-----------------------------------------------------------------------</p>
+<p>这是自定义控制报错</p>
+<p>请输入5-10之间的一个数字：</p>
+<input id="input" type="text">
+<button type="button" onclick = "detect()">检测输入</button>
+<p id="alert2"></p>
+<script>
+    function detect() {
+        var message, x;
+        message = document.getElementById('alert2');
+        message.innerHTML = '';
+        x = document.getElementById('input').value;
+        try {
+            if (x == "") throw "是空的";
+            if (isNaN(x))  throw "不是数字";
+            x = Number(x);
+            if (x<5) throw "太小";
+            if (x > 10) throw "太大";
+            else throw "没问题";
+        }
+        catch(err){
+            message.innerHTML = "输入：" + err
+        }
+        finally {
+            document.getElementById('input').value = '';
+        }
+    }
+</script>
+<p>-----------------------------------------------------------------------</p>
+<h1>通过 local storage 存储并取回数据：</h1>
+
+<p id="demo4"></p>
+
+<script>
+var myObj, myJSON, text, obj;
+
+// 存储数据：
+myObj = { "name":"Bill Gates",  "age":62, "city":"Seattle" };
+myJSON = JSON.stringify(myObj);
+localStorage.setItem("testJSON", myJSON);
+
+// 取回数据：
+text = localStorage.getItem("testJSON");
+obj = JSON.parse(text);
+document.getElementById("demo4").innerHTML = obj.name;
+</script>
+<p>-----------------------------------------------------------------------</p>
+<h1>First Javascript animation</h1>
+<style>
+    #container {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        background: yellow;
+    }
+    #animate {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        background: red;
+    }
+</style>
+<p><button onclick="myMove()">单击我</button></p> 
+
+<div id ="container">
+  <div id ="animate"></div>
+</div>
+
+<script>
+function myMove() {
+  var elem = document.getElementById("animate");   
+  var pos = 0;
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      elem.style.top = pos + "px"; 
+      elem.style.left = pos + "px"; 
+    }
+  }
+}
+</script>
+<p>-----------------------------------------------------------------------</p>
+<h1 onclick="this.innerHTML='谢谢！:)'">点我，求你了</h1>
+<p>-----------------------------------------------------------------------</p>
+<p>什么，几点了？</p>
+<button type="button" onclick="time()">我可以告诉你</button>
+<script>
+    function time() {
+        document.getElementById("timeshow").innerHTML = Date();
+    }
+</script>
+<p id="timeshow"></p>
+<p>-----------------------------------------------------------------------</p>
+<button type="button" onclick="clickclosebutton()">别点我</button>
+<script>
+    function clickclosebutton {
+        window.close();
+    }
+</script>
+<p>-----------------------------------------------------------------------</p>
